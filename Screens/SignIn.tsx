@@ -1,22 +1,51 @@
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
 import React, { useState } from "react";
-import Input from "../Components/Input";
 import DropDownPicker from "react-native-dropdown-picker";
 
-const SignIn = ({navigation}) => {
+const SignIn = ({ navigation }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [city, setCity] = useState(null);
   const [age, setAge] = useState(null);
   const [openCity, setOpenCity] = useState(false);
   const [openAge, setOpenAge] = useState(false);
   const [description, setDescription] = useState("");
 
+  const handleSubmit = () => {
+
+    if (!name || !email || !city || !age || !description) {
+      Alert.alert("Error", "Please fill all fields.");
+      return;
+    }
+
+    navigation.navigate("Detail-SignIn", {
+      name,
+      email,
+      city,
+      age,
+      description,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.card}>
         <Text style={styles.heading}>Welcome To Sign In</Text>
-
-        <Input label="Name" placeholder="Enter the Name" />
-        <Input label="Email" placeholder="Enter the Email" />
+        <View>
+          <Text>Name</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter the Name"
+          value={name}
+          onChangeText={setName}
+        />
+        </View>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter the Email"
+          value={email}
+          onChangeText={setEmail}
+        />
 
         <View style={styles.dropdownContainer}>
           <View style={styles.dropdownWrapper}>
@@ -58,19 +87,21 @@ const SignIn = ({navigation}) => {
             />
           </View>
         </View>
+
         <View style={styles.Des}>
           <Text style={{ marginBottom: 10 }}>Enter The Description</Text>
           <TextInput
             style={styles.textArea}
             placeholder="Enter your description here..."
             value={description}
-            onChangeText={(text) => setDescription(text)}
+            onChangeText={setDescription}
             multiline={true}
             numberOfLines={4}
           />
         </View>
-        <View style={{marginTop:20}}>
-        <Button title="Submit" color={"black"} onPress={()=>navigation.navigate("Detail-SignIn")}/>
+
+        <View style={{ marginTop: 20 }}>
+          <Button title="Submit" color={"black"} onPress={handleSubmit} />
         </View>
       </View>
     </View>
@@ -141,6 +172,15 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
     borderWidth: 1,
     borderColor: "#ccc",
+  },
+  input: {
+    height: 45,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 15,
+    backgroundColor: "#f0f0f0",
   },
   Des: {
     marginTop: 25,
