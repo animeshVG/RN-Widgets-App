@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Input from "../Components/Input";
 import DropDownPicker from "react-native-dropdown-picker";
 
-const SignIn = () => {
+const SignIn = ({navigation}) => {
   const [city, setCity] = useState(null);
   const [age, setAge] = useState(null);
   const [openCity, setOpenCity] = useState(false);
@@ -69,7 +69,9 @@ const SignIn = () => {
             numberOfLines={4}
           />
         </View>
-        <Button title="Submit" color={"black"}/>
+        <View style={{marginTop:20}}>
+        <Button title="Submit" color={"black"} onPress={()=>navigation.navigate("Detail-SignIn")}/>
+        </View>
       </View>
     </View>
   );

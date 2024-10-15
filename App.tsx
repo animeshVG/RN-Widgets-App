@@ -17,7 +17,7 @@ const App = () => {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
         <Stack.Screen name="Sign-In" component={SignIn} options={{headerShown:false}} />
-        <Stack.Screen name="Detail-SignIn" component={DetailSignIn} />
+        <Stack.Screen name="Detail-SignIn" component={DetailSignIn} options={{headerShown:false}} />
         <Stack.Screen name="Weather" component={Weather} />
         <Stack.Screen name="Notification" component={Notification} />
         <Stack.Screen name="Camera" component={Camera} />
